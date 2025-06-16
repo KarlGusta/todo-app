@@ -19,18 +19,18 @@ const todoSchema = new mongoose.Schema ({
 });
 const Todo = mongoose.model('Todo', todoSchema);
 
-app.get('/todos', async (req, res) => {
+app.get('/api/todos', async (req, res) => {
     const todos = await Todo.find();
     res.json(todos);
 });
 
-app.post('/todos', async (req, res) => {
+app.post('/api/todos', async (req, res) => {
     const todo = new Todo({text: req.body.text});
     await todo.save();
     res.json(todo);
 });
 
-app.delete('/todos/:id', async (req, res) => {
+app.delete('/api/todos/:id', async (req, res) => {
     await Todo.findByIdAndDelete(req.params.id);
     res.sendStatus(204);
 });
